@@ -80,7 +80,12 @@ function getUv(){
 }
 
 function displayCurrentWeather(data){
-    $("#current-name").text(data.name + " (" + moment().format("l") + ")");
+    var weatherIcon = data.weather[0].icon;
+    console.log(weatherIcon);
+    weatherIconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+    console.log(weatherIconURL);
+    $("#icon").attr("src", weatherIconURL);
+    $("#current-name").text(data.name + " (" + moment().format("l") + ") ");
     $("#current-temp").text("Temperature: " + data.main.temp + " °F");
     $("#current-humidity").text("Humidity: " + data.main.humidity + "%");
     $("#current-wind").text("Wind Speed: " + data.wind.speed + " MPH");
