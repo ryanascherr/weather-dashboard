@@ -5,6 +5,10 @@ var searchValue;
 var currentWeatherData;
 var forecast;
 var queryURL;
+var weatherQueryURL;
+var uvQueryURL
+var lat;
+var lon;
 
 function getSearchValue(){
     searchValue = $("#search-value").val();
@@ -32,6 +36,8 @@ function getCurrentWeather(searchValue){
         })
         .then(function (data){
             console.log(data);
+            lat = data.coord.lat;
+            lon = data.coord.lon;
             displayCurrentWeather(data);
         })
 }
@@ -54,11 +60,32 @@ function getForecast(){
         })
 }
 
+http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
+
+function getUv(){
+    uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+    lat +
+    "&lon=" +
+    lon +
+    "&appid=" +
+    apiKey;
+
+    fetch(uvQueryURL)
+        .then(function (response){
+            return response.json();
+        })
+        .then(function (data){
+            console.log(data);
+            $("#current-uv").text("UV Index: " + data.value);
+        })
+}
+
 function displayCurrentWeather(data){
-    $("#current-name").text(data.name);
+    $("#current-name").text(data.name + " (" + moment().format("l") + ")");
     $("#current-temp").text("Temperature: " + data.main.temp + " °F");
     $("#current-humidity").text("Humidity: " + data.main.humidity + "%");
     $("#current-wind").text("Wind Speed: " + data.wind.speed + " MPH");
+    getUv();
 }
 
 function displayForecast(data){
