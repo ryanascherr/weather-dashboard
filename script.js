@@ -2,6 +2,7 @@ var apiKey = "48429ee96c9bd15088c309d848c40e29"
 
 var searchBtn = $("#search-btn");
 var searchValue;
+var currentWeatherData;
 
 function getSearchValue(){
     searchValue = $("#search-value").val();
@@ -23,13 +24,20 @@ function getCurrentWeather(searchValue){
         })
         .then(function (data){
             console.log(data);
+            currentWeatherData = data;
+            displayCurrentWeather();
         })
-
-    displayCurrentWeather();
 }
 
 function displayCurrentWeather(){
-    
+    var cityName = currentWeatherData.name;
+    var temp = currentWeatherData.main.temp;
+    var humidity = currentWeatherData.main.humidity;
+    var windSpeed = currentWeatherData.wind.speed;
+    $("#current-name").text(cityName);
+    $("#current-temp").text(temp);
+    $("#current-humidity").text(humidity);
+    $("#current-wind").text(windSpeed);
 }
 
 searchBtn.click(getSearchValue);
