@@ -89,16 +89,22 @@ function displayCurrentWeather(data){
 
 function displayForecast(data){
     $(".hidden").removeClass("hidden");
-    $(".test").children().eq(1).children().first().text(moment().add(1, 'days').format("l"));
-    $(".test").children().eq(1).children().eq(2).text("Temp: " + data.list[7].main.temp + " °F");
-    $(".test").children().eq(1).children().eq(3).text("Humidity: " + data.list[7].main.humidity + "%");
+
+    console.log(data.list[7].weather[0].icon);
+
+    $(".one").children().first().text(moment().add(1, 'days').format("l"));
+    $(".one").children().eq(1).text("Hi!");
+    $(".one").children().eq(2).text("Temp: " + data.list[7].main.temp + " °F");
+    $(".one").children().eq(3).text("Humidity: " + data.list[7].main.humidity + "%");
 }
 
 function displayUv(data){
     $("#uv-text").text("UV Index: ");
     $("#uv-index").text(data.value);
+    $("#uv-index").removeClass("low medium high very-high");
 
     if ($("#uv-index").text() < 3){
+        $("#uv-index").addClass("low")
         $("#uv-index").addClass("low");
     } else if ($("#uv-index").text() < 5){
         $("#uv-index").addClass("medium");

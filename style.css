@@ -66,3 +66,18 @@ header{
     background-color: red;
     color: white;
 }
+
+.forecast-container{
+    margin-top: 2.5%;
+}
+
+.all-forecast-cards{
+    display: flex;
+    justify-content: space-between;
+}
+
+.forecast-card{
+    background-color: lightblue;
+    color: white;
+    width: 20%;
+}
