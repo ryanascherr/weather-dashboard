@@ -18,9 +18,19 @@ header{
 
 #container-small{
     width: 30%;
+    padding: 1%;
 }
 
 #container-big{
     width: 70%;
-    border: 2px solid green;
+    margin-left: 1%;
+    padding: 1%;
+}
+
+.hidden{
+    display: none;
+}
+
+.shown{
+    display: block;
 }
