@@ -34,3 +34,35 @@ header{
 .shown{
     display: block;
 }
+
+.low{
+    padding: 5px;
+    border: 1px solid green;
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+}
+
+.medium{
+    padding: 5px;
+    border: 1px solid yellow;
+    border-radius: 10px;
+    background-color: yellow;
+    color: white;
+}
+
+.high{
+    padding: 5px;
+    border: 1px solid orange;
+    border-radius: 10px;
+    background-color: orange;
+    color: white;
+}
+
+.very-high{
+    padding: 5px;
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+}

@@ -23,7 +23,7 @@ function getCurrentWeather(searchValue){
     "&appid=" +
     apiKey +
     "&units=imperial";
-    console.log(queryURL);
+    console.log(weatherQueryURL);
 
     fetch(weatherQueryURL)
         .then(function (response){
@@ -42,13 +42,13 @@ function getCurrentWeather(searchValue){
         })
 }
 
-function getForecast(){
+function getForecast(searchValue){
     forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" +
     searchValue +
     "&appid=" +
     apiKey +
     "&units=imperial";
-    console.log(queryURL);
+    console.log(forecastQueryURL);
 
     fetch(forecastQueryURL)
         .then(function (response){
@@ -60,8 +60,6 @@ function getForecast(){
         })
 }
 
-http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
-
 function getUv(){
     uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" +
     lat +
@@ -69,6 +67,7 @@ function getUv(){
     lon +
     "&appid=" +
     apiKey;
+    console.log(uvQueryURL);
 
     fetch(uvQueryURL)
         .then(function (response){
@@ -76,7 +75,7 @@ function getUv(){
         })
         .then(function (data){
             console.log(data);
-            $("#current-uv").text("UV Index: " + data.value);
+            displayUv(data);
         })
 }
 
@@ -93,6 +92,21 @@ function displayForecast(data){
     $(".test").children().eq(1).children().first().text(moment().add(1, 'days').format("l"));
     $(".test").children().eq(1).children().eq(2).text("Temp: " + data.list[7].main.temp + " °F");
     $(".test").children().eq(1).children().eq(3).text("Humidity: " + data.list[7].main.humidity + "%");
+}
+
+function displayUv(data){
+    $("#uv-text").text("UV Index: ");
+    $("#uv-index").text(data.value);
+
+    if ($("#uv-index").text() < 3){
+        $("#uv-index").addClass("low");
+    } else if ($("#uv-index").text() < 5){
+        $("#uv-index").addClass("medium");
+    } else if ($("#uv-index").text() < 7){
+        $("#uv-index").addClass("high");
+    } else {
+        $("#uv-index").addClass("very-high");
+    }
 }
 
 searchBtn.click(getSearchValue);
