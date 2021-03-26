@@ -9,12 +9,30 @@ var weatherQueryURL;
 var uvQueryURL
 var lat;
 var lon;
+var searchValueList = [];
 
 function getSearchValue(){
     searchValue = $("#search-value").val();
     console.log(searchValue);
     getCurrentWeather(searchValue);
     getForecast(searchValue);
+    setSearchValue();
+}
+
+function setSearchValue(){
+    searchValueList.push(searchValue);
+    localStorage.setItem("searchValueList", searchValueList);
+    console.log(searchValueList);
+    showListOfSearches();
+}
+
+function showListOfSearches(){
+    var list = localStorage.getItem("searchValueList");
+    for (i = 0; i < list.length; i++) {
+        var ul = document.createElement("ul");
+        //add text to ul
+        //append li to ul
+    }
 }
 
 function getCurrentWeather(searchValue){
@@ -154,5 +172,7 @@ function displayUv(data){
         $("#uv-index").addClass("very-high");
     }
 }
+
+
 
 searchBtn.click(getSearchValue);
