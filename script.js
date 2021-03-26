@@ -94,13 +94,48 @@ function displayCurrentWeather(data){
 
 function displayForecast(data){
     $(".hidden").removeClass("hidden");
-
-    console.log(data.list[7].weather[0].icon);
+    var weatherIcon;
+    var weatherIconURL;
+    
+    weatherIcon = data.list[7].weather[0].icon;
+    weatherIconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
 
     $(".one").children().first().text(moment().add(1, 'days').format("l"));
-    $(".one").children().eq(1).text("Hi!");
     $(".one").children().eq(2).text("Temp: " + data.list[7].main.temp + " °F");
     $(".one").children().eq(3).text("Humidity: " + data.list[7].main.humidity + "%");
+    $(".forecast-icon-1").attr("src", weatherIconURL);
+
+    weatherIcon = data.list[15].weather[0].icon;
+    weatherIconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+
+    $(".two").children().first().text(moment().add(2, 'days').format("l"));
+    $(".two").children().eq(2).text("Temp: " + data.list[15].main.temp + " °F");
+    $(".two").children().eq(3).text("Humidity: " + data.list[15].main.humidity + "%");
+    $(".forecast-icon-2").attr("src", weatherIconURL);
+
+    weatherIcon = data.list[23].weather[0].icon;
+    weatherIconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+
+    $(".three").children().first().text(moment().add(3, 'days').format("l"));
+    $(".three").children().eq(2).text("Temp: " + data.list[23].main.temp + " °F");
+    $(".three").children().eq(3).text("Humidity: " + data.list[23].main.humidity + "%");
+    $(".forecast-icon-3").attr("src", weatherIconURL);
+
+    weatherIcon = data.list[31].weather[0].icon;
+    weatherIconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+
+    $(".four").children().first().text(moment().add(4, 'days').format("l"));
+    $(".four").children().eq(2).text("Temp: " + data.list[31].main.temp + " °F");
+    $(".four").children().eq(3).text("Humidity: " + data.list[31].main.humidity + "%");
+    $(".forecast-icon-4").attr("src", weatherIconURL);
+
+    weatherIcon = data.list[39].weather[0].icon;
+    weatherIconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+
+    $(".five").children().first().text(moment().add(5, 'days').format("l"));
+    $(".five").children().eq(2).text("Temp: " + data.list[39].main.temp + " °F");
+    $(".five").children().eq(3).text("Humidity: " + data.list[39].main.humidity + "%");
+    $(".forecast-icon-5").attr("src", weatherIconURL);
 }
 
 function displayUv(data){
