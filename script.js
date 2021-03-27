@@ -31,11 +31,11 @@ function setSearchValue(){
         searchValueList.push(searchValue);
         //array is added to local storage
         localStorage.setItem("searchValueList", searchValueList);
+        showListOfSearches();
     }
 
     console.log(searchValueList);
     console.log(typeof searchValueList);
-    showListOfSearches();
 }
 
 function showListOfSearches(){
@@ -43,6 +43,8 @@ function showListOfSearches(){
     newListItem = localStorage.getItem("searchValueList");
     var itemsSeparated = newListItem.split(",");
     console.log(itemsSeparated);
+
+    $("ul").empty();
     
     for (i = 0; i < itemsSeparated.length; i++) {
         var ul = $("<ul>");
