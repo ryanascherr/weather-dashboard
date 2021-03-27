@@ -10,29 +10,48 @@ var uvQueryURL
 var lat;
 var lon;
 var searchValueList = [];
+var list = [];
 
 function getSearchValue(){
     searchValue = $("#search-value").val();
+    searchValue = searchValue.substr(0,1).toUpperCase()+searchValue.substr(1);
+
     console.log(searchValue);
+
     getCurrentWeather(searchValue);
     getForecast(searchValue);
     setSearchValue();
 }
 
 function setSearchValue(){
-    searchValueList.push(searchValue);
-    localStorage.setItem("searchValueList", searchValueList);
+    if (searchValueList.includes(searchValue)){
+        localStorage.setItem("searchValueList", searchValueList);
+    } else {
+        //search result added to array
+        searchValueList.push(searchValue);
+        //array is added to local storage
+        localStorage.setItem("searchValueList", searchValueList);
+    }
+
     console.log(searchValueList);
+    console.log(typeof searchValueList);
     showListOfSearches();
 }
 
 function showListOfSearches(){
-    var list = localStorage.getItem("searchValueList");
-    for (i = 0; i < list.length; i++) {
-        var ul = document.createElement("ul");
+    //new variable is now 
+    newListItem = localStorage.getItem("searchValueList");
+    var itemsSeparated = newListItem.split(",");
+    console.log(itemsSeparated);
+    
+    for (i = 0; i < itemsSeparated.length; i++) {
+        var ul = $("<ul>");
         //add text to ul
+        ul.text(itemsSeparated[i]);
         //append li to ul
+        $("#list-items").append(ul);
     }
+   //localStorage.clear();
 }
 
 function getCurrentWeather(searchValue){
@@ -173,6 +192,11 @@ function displayUv(data){
     }
 }
 
+/*function initialize(){
+    showListOfSearches();
+}*/
+
+//initialize();
 
 
 searchBtn.click(getSearchValue);
