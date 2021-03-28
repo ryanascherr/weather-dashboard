@@ -19,6 +19,11 @@ header{
 #container-small{
     width: 30%;
     padding: 1%;
+    background-color: #F2F3F4;
+}
+
+#container-small h3{
+    color: #17202A;
 }
 
 #container-big{
@@ -89,4 +94,15 @@ header{
     border: 1px solid rgb(56, 106, 170);
     border-radius: 10px;
     color: white;
+}
+
+#list-items{
+    padding: 0;
+}
+
+.list-item{
+    padding: 10px;
+    background-color: white;
+    color: #626567;
+    margin: 5px;
 }

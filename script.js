@@ -12,6 +12,7 @@ var lon;
 var searchValueList = [];
 var list = [];
 
+
 function getSearchValue(){
     searchValue = $("#search-value").val();
     searchValue = searchValue.substr(0,1).toUpperCase()+searchValue.substr(1);
@@ -50,6 +51,8 @@ function showListOfSearches(){
         var ul = $("<ul>");
         //add text to ul
         ul.text(itemsSeparated[i]);
+        //add styling
+        ul.addClass("list-item")
         //append li to ul
         $("#list-items").append(ul);
     }
@@ -194,11 +197,11 @@ function displayUv(data){
     }
 }
 
-/*function initialize(){
+function initialize(){
     showListOfSearches();
-}*/
+}
 
-//initialize();
+initialize();
 
 
 searchBtn.click(getSearchValue);
