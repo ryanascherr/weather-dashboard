@@ -106,6 +106,7 @@ header{
     background-color: white;
     color: #626567;
     margin: 5px;
+    list-style-type: none;
 }
 
 .list-item:hover{

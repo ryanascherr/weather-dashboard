@@ -1,6 +1,7 @@
 var apiKey = "48429ee96c9bd15088c309d848c40e29"
 
 var searchBtn = $("#search-btn");
+
 var searchValue;
 var currentWeatherData;
 var forecast;
@@ -13,16 +14,14 @@ var searchValueList = [];
 var list = [];
 
 
-function getSearchValue(){
-    searchValue = $("#search-value").val();
-    searchValue = searchValue.substr(0,1).toUpperCase()+searchValue.substr(1);
+// function getSearchValue(){
+//     searchValue = $("#search-value").val();
+//     searchValue = searchValue.substr(0,1).toUpperCase()+searchValue.substr(1);
 
-    console.log(searchValue);
-
-    getCurrentWeather(searchValue);
-    getForecast(searchValue);
-    setSearchValue();
-}
+//     getCurrentWeather(searchValue);
+//     getForecast(searchValue);
+//     setSearchValue();
+// }
 
 function setSearchValue(){
     if (searchValueList.includes(searchValue)){
@@ -34,30 +33,27 @@ function setSearchValue(){
         localStorage.setItem("searchValueList", searchValueList);
         showListOfSearches();
     }
-
-    console.log(searchValueList);
-    console.log(typeof searchValueList);
 }
 
 function showListOfSearches(){
-    //new variable is now 
+
     newListItem = localStorage.getItem("searchValueList");
     var itemsSeparated = newListItem.split(",");
-    console.log(itemsSeparated);
 
     $("ul").empty();
     
     for (i = 0; i < itemsSeparated.length; i++) {
-        var ul = $("<ul>");
-        //add text to ul
-        ul.text(itemsSeparated[i]);
+        var li = $("<li>");
+        //add text to li
+        li.text(itemsSeparated[i]);
         //add data
-        ul.attr("data-name", itemsSeparated[i])
+        li.attr("data-name", itemsSeparated[i])
         //add styling
-        ul.addClass("list-item")
-        //append li to ul
-        $("#list-items").append(ul);
+        li.addClass("list-item")
+        //append li to li
+        $("#list-items").append(li);
     }
+
    //localStorage.clear();
 }
 
@@ -67,7 +63,6 @@ function getCurrentWeather(searchValue){
     "&appid=" +
     apiKey +
     "&units=imperial";
-    console.log(weatherQueryURL);
 
     fetch(weatherQueryURL)
         .then(function (response){
@@ -79,7 +74,6 @@ function getCurrentWeather(searchValue){
             return response.json();
         })
         .then(function (data){
-            console.log(data);
             lat = data.coord.lat;
             lon = data.coord.lon;
             displayCurrentWeather(data);
@@ -92,14 +86,12 @@ function getForecast(searchValue){
     "&appid=" +
     apiKey +
     "&units=imperial";
-    console.log(forecastQueryURL);
 
     fetch(forecastQueryURL)
         .then(function (response){
             return response.json();
         })
         .then(function (data){
-            console.log(data);
             displayForecast(data);
         })
 }
@@ -111,23 +103,20 @@ function getUv(){
     lon +
     "&appid=" +
     apiKey;
-    console.log(uvQueryURL);
 
     fetch(uvQueryURL)
         .then(function (response){
             return response.json();
         })
         .then(function (data){
-            console.log(data);
             displayUv(data);
         })
 }
 
 function displayCurrentWeather(data){
     var weatherIcon = data.weather[0].icon;
-    console.log(weatherIcon);
     weatherIconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
-    console.log(weatherIconURL);
+
     $("#icon").attr("src", weatherIconURL);
     $("#current-name").text(data.name + " (" + moment().format("l") + ") ");
     $("#current-temp").text("Temperature: " + data.main.temp + " °F");
@@ -206,34 +195,26 @@ function initialize(){
 initialize();
 
 
-searchBtn.click(getSearchValue);
+searchBtn.click(getSearchValueInput);
 
-$(".list-item").click(function(){
-    var listName = $(this).attr("data-name");
-    console.log(listName);
+function getSearchValueInput(){
+    searchValue = $("#search-value").val();
+    searchValue = searchValue.substr(0,1).toUpperCase()+searchValue.substr(1);
 
-    weatherQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
-    listName +
-    "&appid=" +
-    apiKey +
-    "&units=imperial";
-    console.log(weatherQueryURL);
+    getCurrentWeather(searchValue);
+    getForecast(searchValue);
+    setSearchValue();
+}
 
-    $(".hidden").removeClass("hidden")
+$("li").click(getSearchValueBtn);
 
-    fetch(weatherQueryURL)
-        .then(function (response){
-            if (!response.ok){
-                alert("Please enter valid location name.");
-                throw response.json();
-            }
+function getSearchValueBtn(){
+    console.log("Hi!");
+    
+    searchValue = $(this).attr("data-name");
+    console.log(searchValue);
 
-            return response.json();
-        })
-        .then(function (data){
-            console.log(data);
-            lat = data.coord.lat;
-            lon = data.coord.lon;
-            displayCurrentWeather(data);
-        })
-})
+    getCurrentWeather(searchValue);
+    getForecast(searchValue);
+    setSearchValue();
+}
