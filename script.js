@@ -51,6 +51,8 @@ function showListOfSearches(){
         var ul = $("<ul>");
         //add text to ul
         ul.text(itemsSeparated[i]);
+        //add data
+        ul.attr("data-name", itemsSeparated[i])
         //add styling
         ul.addClass("list-item")
         //append li to ul
@@ -205,3 +207,33 @@ initialize();
 
 
 searchBtn.click(getSearchValue);
+
+$(".list-item").click(function(){
+    var listName = $(this).attr("data-name");
+    console.log(listName);
+
+    weatherQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
+    listName +
+    "&appid=" +
+    apiKey +
+    "&units=imperial";
+    console.log(weatherQueryURL);
+
+    $(".hidden").removeClass("hidden")
+
+    fetch(weatherQueryURL)
+        .then(function (response){
+            if (!response.ok){
+                alert("Please enter valid location name.");
+                throw response.json();
+            }
+
+            return response.json();
+        })
+        .then(function (data){
+            console.log(data);
+            lat = data.coord.lat;
+            lon = data.coord.lon;
+            displayCurrentWeather(data);
+        })
+})
