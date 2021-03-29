@@ -1,6 +1,7 @@
 var apiKey = "48429ee96c9bd15088c309d848c40e29"
 
 var searchBtn = $("#search-btn");
+var listItems = document.getElementById("list-items");
 
 var searchValue;
 var currentWeatherData;
@@ -207,15 +208,33 @@ function getSearchValueInput(){
     setSearchValue();
 }
 
-$("li").click(getSearchValueBtn);
+// $("li").click(getSearchValueBtn);
 
-function getSearchValueBtn(){
-    console.log("Hi!");
+// function getSearchValueBtn(){
+//     console.log("Hi!");
     
-    searchValue = $(this).attr("data-name");
-    console.log(searchValue);
+//     searchValue = $(this).attr("data-name");
+//     console.log(searchValue);
 
-    getCurrentWeather(searchValue);
-    getForecast(searchValue);
-    setSearchValue();
-}
+//     getCurrentWeather(searchValue);
+//     getForecast(searchValue);
+//     setSearchValue();
+// }
+
+listItems.addEventListener("click", function(event){
+
+    var element = event.target;
+
+    if (element.matches("li")) {
+        searchValue = element.getAttribute("data-name");;
+
+        console.log(searchValue);
+
+        getCurrentWeather(searchValue);
+        getForecast(searchValue);
+        setSearchValue();
+
+    } else {
+        return;
+    }
+})
