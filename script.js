@@ -38,16 +38,18 @@ function setSearchValue(){
 function showListOfSearches(){
 
     newListItem = localStorage.getItem("searchValueList");
-    var itemsSeparated = newListItem.split(",");
+    searchValueList = newListItem;
+    searchValueList = searchValueList.split(",");
+    console.log(searchValueList);
 
     $("ul").empty();
     
-    for (i = 0; i < itemsSeparated.length; i++) {
+    for (i = 0; i < searchValueList.length; i++) {
         var li = $("<li>");
         //add text to li
-        li.text(itemsSeparated[i]);
+        li.text(searchValueList[i]);
         //add data
-        li.attr("data-name", itemsSeparated[i])
+        li.attr("data-name", searchValueList[i])
         //add styling
         li.addClass("list-item")
         //append li to li
@@ -193,7 +195,6 @@ function initialize(){
 }
 
 initialize();
-
 
 searchBtn.click(getSearchValueInput);
 
