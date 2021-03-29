@@ -14,16 +14,6 @@ var lon;
 var searchValueList = [];
 var list = [];
 
-
-// function getSearchValue(){
-//     searchValue = $("#search-value").val();
-//     searchValue = searchValue.substr(0,1).toUpperCase()+searchValue.substr(1);
-
-//     getCurrentWeather(searchValue);
-//     getForecast(searchValue);
-//     setSearchValue();
-// }
-
 function setSearchValue(){
     if (searchValueList.includes(searchValue)){
         localStorage.setItem("searchValueList", searchValueList);
@@ -56,8 +46,6 @@ function showListOfSearches(){
         //append li to li
         $("#list-items").append(li);
     }
-
-   //localStorage.clear();
 }
 
 function getCurrentWeather(searchValue){
@@ -207,19 +195,6 @@ function getSearchValueInput(){
     getForecast(searchValue);
     setSearchValue();
 }
-
-// $("li").click(getSearchValueBtn);
-
-// function getSearchValueBtn(){
-//     console.log("Hi!");
-    
-//     searchValue = $(this).attr("data-name");
-//     console.log(searchValue);
-
-//     getCurrentWeather(searchValue);
-//     getForecast(searchValue);
-//     setSearchValue();
-// }
 
 listItems.addEventListener("click", function(event){
 
