@@ -13,9 +13,12 @@ var lat;
 var lon;
 var searchValueList = [];
 var list = [];
+var valid = false;
 
 function setSearchValue(){
-    if (searchValueList) {
+    if (valid == false){
+        return;
+    } else if (searchValueList) {
         if (searchValueList.includes(searchValue)){
             localStorage.setItem("searchValueList", searchValueList);
         } else {
@@ -70,16 +73,20 @@ function getCurrentWeather(searchValue){
     fetch(weatherQueryURL)
         .then(function (response){
             if (!response.ok){
+                valid = false;
                 alert("Please enter valid location name.");
                 throw response.json();
+            } else {
+                valid = true;
+                return response.json();
             }
-
-            return response.json();
+            
         })
         .then(function (data){
             lat = data.coord.lat;
             lon = data.coord.lon;
             displayCurrentWeather(data);
+            setSearchValue();
         })
 }
 
@@ -210,11 +217,15 @@ searchBtn.click(getSearchValueInput);
 
 function getSearchValueInput(){
     searchValue = $("#search-value").val();
-    searchValue = searchValue.substr(0,1).toUpperCase()+searchValue.substr(1);
-
-    getCurrentWeather(searchValue);
-    getForecast(searchValue);
-    setSearchValue();
+    if (!searchValue) {
+        return;
+    } else {
+        searchValue = searchValue.substr(0,1).toUpperCase()+searchValue.substr(1);
+    
+        getCurrentWeather(searchValue);
+        getForecast(searchValue);
+    }
+    
 }
 
 listItems.addEventListener("click", function(event){
