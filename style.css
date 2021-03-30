@@ -131,4 +131,15 @@ header{
     #forecast-heading{
         text-align: center;
     }
-  }
+}
+
+@media screen and (max-width: 668px) {
+
+    main{
+        flex-direction: column;
+    }
+    
+    #container-small, #container-big{
+        width: 100%;
+    }
+}
