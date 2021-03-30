@@ -21,11 +21,13 @@ function setSearchValue(){
     } else if (searchValueList) {
         if (searchValueList.includes(searchValue)){
             localStorage.setItem("searchValueList", searchValueList);
+            $(".hidden").removeClass("hidden");
         } else {
             //search result added to array
             searchValueList.push(searchValue);
             //array is added to local storage
             localStorage.setItem("searchValueList", searchValueList);
+            $(".hidden").removeClass("hidden");
             showListOfSearches();
         }
     } else {
@@ -34,6 +36,7 @@ function setSearchValue(){
         searchValueList.push(searchValue);
         //array is added to local storage
         localStorage.setItem("searchValueList", searchValueList);
+        $(".hidden").removeClass("hidden");
         showListOfSearches();
     }
 }
@@ -74,10 +77,11 @@ function getCurrentWeather(searchValue){
         .then(function (response){
             if (!response.ok){
                 valid = false;
-                alert("Please enter valid location name.");
+                $("#error-message").text("Please enter valid location name.");
                 throw response.json();
             } else {
                 valid = true;
+                $("#error-message").text("");
                 return response.json();
             }
             
@@ -145,7 +149,6 @@ function displayCurrentWeather(data){
 }
 
 function displayForecast(data){
-    $(".hidden").removeClass("hidden");
     var weatherIcon;
     var weatherIconURL;
     
