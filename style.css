@@ -22,6 +22,10 @@ header{
     background-color: #F2F3F4;
 }
 
+img{
+    width: 25px;
+}
+
 #container-small h3{
     color: #17202A;
 }
@@ -119,12 +123,13 @@ header{
 @media screen and (max-width: 992px) {
 
     .all-forecast-cards{
-        flex-direction: column;
+        flex-wrap: wrap;
         align-items: center;
+        justify-content: space-around;
     }
 
     .forecast-card{
-        width: 75%;
+        width: 45%;
         margin-bottom: 1%;
     }
 
@@ -138,7 +143,11 @@ header{
     main{
         flex-direction: column;
     }
-    
+
+    .forecast-card{
+        width: 75%;
+    }
+
     #container-small, #container-big{
         width: 100%;
     }
