@@ -100,12 +100,21 @@ function getForecast(searchValue){
 }
 
 function getUv(){
-    uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+
+    uvQueryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+
     lat +
     "&lon=" +
     lon +
-    "&appid=" +
+    "&exclude=hourly,daily&appid=" +
     apiKey;
+
+
+    // uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+    // lat +
+    // "&lon=" +
+    // lon +
+    // "&appid=" +
+    // apiKey;
 
     fetch(uvQueryURL)
         .then(function (response){
@@ -176,7 +185,7 @@ function displayForecast(data){
 
 function displayUv(data){
     $("#uv-text").text("UV Index: ");
-    $("#uv-index").text(data.value);
+    $("#uv-index").text(data.current.uvi);
     $("#uv-index").removeClass("low medium high very-high");
 
     if ($("#uv-index").text() < 3){
