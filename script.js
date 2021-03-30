@@ -15,9 +15,18 @@ var searchValueList = [];
 var list = [];
 
 function setSearchValue(){
-    if (searchValueList.includes(searchValue)){
-        localStorage.setItem("searchValueList", searchValueList);
+    if (searchValueList) {
+        if (searchValueList.includes(searchValue)){
+            localStorage.setItem("searchValueList", searchValueList);
+        } else {
+            //search result added to array
+            searchValueList.push(searchValue);
+            //array is added to local storage
+            localStorage.setItem("searchValueList", searchValueList);
+            showListOfSearches();
+        }
     } else {
+        searchValueList = [];
         //search result added to array
         searchValueList.push(searchValue);
         //array is added to local storage
@@ -30,21 +39,24 @@ function showListOfSearches(){
 
     newListItem = localStorage.getItem("searchValueList");
     searchValueList = newListItem;
-    searchValueList = searchValueList.split(",");
-    console.log(searchValueList);
+    if (searchValueList) {
+        searchValueList = searchValueList.split(",");
 
-    $("ul").empty();
-    
-    for (i = 0; i < searchValueList.length; i++) {
-        var li = $("<li>");
-        //add text to li
-        li.text(searchValueList[i]);
-        //add data
-        li.attr("data-name", searchValueList[i])
-        //add styling
-        li.addClass("list-item")
-        //append li to li
-        $("#list-items").append(li);
+        console.log(searchValueList);
+
+        $("ul").empty();
+        
+        for (i = 0; i < searchValueList.length; i++) {
+            var li = $("<li>");
+            //add text to li
+            li.text(searchValueList[i]);
+            //add data
+            li.attr("data-name", searchValueList[i])
+            //add styling
+            li.addClass("list-item")
+            //append li to li
+            $("#list-items").append(li);
+        }
     }
 }
 
