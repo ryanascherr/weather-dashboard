@@ -22,7 +22,7 @@ header{
     background-color: #F2F3F4;
 }
 
-img{
+#search-image{
     width: 25px;
 }
 
@@ -138,7 +138,7 @@ img{
     }
 }
 
-@media screen and (max-width: 668px) {
+@media screen and (max-width: 768px) {
 
     main{
         flex-direction: column;
