@@ -119,14 +119,6 @@ function getUv(){
     "&exclude=hourly,daily&appid=" +
     apiKey;
 
-
-    // uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" +
-    // lat +
-    // "&lon=" +
-    // lon +
-    // "&appid=" +
-    // apiKey;
-
     fetch(uvQueryURL)
         .then(function (response){
             return response.json();
