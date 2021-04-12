@@ -18,6 +18,10 @@ When a user enters the name of any city and clicks the search button, they will 
 
 This webpage features semantic HTML as well as responsive design. The page has 2 break points (768px and 992px) and will display nicely across any size screen.
 
+## Technologies Used
+
+HTML, CSS, JS, JQuery, OpenWeatherMap API
+
 ## Credits
 
 Jeff DeRosalia, Dan Rosenbaum
@@ -25,3 +29,7 @@ Jeff DeRosalia, Dan Rosenbaum
 ## Link
 
 https://ryanascherr.github.io/weather-dashboard/
+
+## Contact Information
+
+ryanascherr@gmail.com
